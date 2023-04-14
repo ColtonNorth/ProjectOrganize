@@ -134,9 +134,12 @@ namespace ProjectOrganize {
 			// 
 			// button1
 			// 
+			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->button1->Font = (gcnew System::Drawing::Font(L"Rockwell", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button1->Location = System::Drawing::Point(152, 234);
+			this->button1->MaximumSize = System::Drawing::Size(93, 32);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(93, 32);
 			this->button1->TabIndex = 5;
@@ -146,9 +149,12 @@ namespace ProjectOrganize {
 			// 
 			// button2
 			// 
+			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->button2->Font = (gcnew System::Drawing::Font(L"Rockwell", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button2->Location = System::Drawing::Point(152, 291);
+			this->button2->MaximumSize = System::Drawing::Size(93, 33);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(93, 33);
 			this->button2->TabIndex = 6;
@@ -158,9 +164,12 @@ namespace ProjectOrganize {
 			// 
 			// button3
 			// 
+			this->button3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->button3->Font = (gcnew System::Drawing::Font(L"Rockwell", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button3->Location = System::Drawing::Point(152, 346);
+			this->button3->MaximumSize = System::Drawing::Size(93, 33);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(93, 33);
 			this->button3->TabIndex = 7;
