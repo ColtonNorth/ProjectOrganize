@@ -239,6 +239,10 @@ namespace ProjectOrganize {
 				user->name = reader->GetString(1);
 				user->password = reader->GetString(2);
 				user->email = reader->GetString(3);
+				user->work = reader->GetString(4);
+				user->hobbies = reader->GetString(5);
+				user->finances = reader->GetString(6);
+				user->family = reader->GetString(7);
 				this->Close();
 			}
 			else

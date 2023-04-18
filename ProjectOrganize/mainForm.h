@@ -18,6 +18,7 @@ namespace ProjectOrganize {
 	/// </summary>
 	public ref class mainForm : public System::Windows::Forms::Form
 	{
+		User^ mUser;
 	public:
 		mainForm(User ^user)
 		{
@@ -25,8 +26,9 @@ namespace ProjectOrganize {
 			//
 			//TODO: Add the constructor code here
 			//
+			mUser = user;
 			label1->Text = user->name + "'s Organizer";
-
+			
 
 		}
 
@@ -258,7 +260,7 @@ namespace ProjectOrganize {
 
 		}
 #pragma endregion
-	public: User^ user = mainForm::user;
+	//public: User^ user = mainForm::user;
 
 	private: System::Void monthCalendar1_DateChanged(System::Object^ sender, System::Windows::Forms::DateRangeEventArgs^ e) {
 	}
@@ -291,7 +293,7 @@ namespace ProjectOrganize {
 	}
 	//When the work button is pressed, we want to fill the text box with work related data
 	private: System::Void work_Click(System::Object^ sender, System::EventArgs^ e) {
-		richTextBox1->Text = user->work;
+		richTextBox1->Text = mUser->work;
 	}
 	
 	private: System::Void hobbies_Click(System::Object^ sender, System::EventArgs^ e) {
