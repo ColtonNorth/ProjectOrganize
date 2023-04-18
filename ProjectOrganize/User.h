@@ -9,7 +9,10 @@ public:
 	String^ name;
 	String^ password;
 	String^ email;
-
+	String^ work;
+	String^ hobbies;
+	String^ finances;
+	String^ family;
 
 };
 
