@@ -1,5 +1,7 @@
 #pragma once
 #include "User.h"
+#include<iostream>
+#include<string>
 
 
 
@@ -12,6 +14,7 @@ namespace ProjectOrganize {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::Data::SqlClient;
+	using namespace std;
 
 	/// <summary>
 	/// Summary for mainForm
@@ -260,7 +263,8 @@ namespace ProjectOrganize {
 
 		}
 #pragma endregion
-	//public: User^ user = mainForm::user;
+		
+
 
 	private: System::Void monthCalendar1_DateChanged(System::Object^ sender, System::Windows::Forms::DateRangeEventArgs^ e) {
 	}
@@ -271,6 +275,7 @@ namespace ProjectOrganize {
 	//Save the current state of the text box with the associated button.
 	private: System::Void saveToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ workText = richTextBox1->Text;
+		int^ id = mUser->id;
 		//Update user work info with text in textBox
 		try
 		{
@@ -278,9 +283,10 @@ namespace ProjectOrganize {
 			SqlConnection sqlConn(connString);
 			sqlConn.Open();
 
-			String^ sqlQuery = "INSERT INTO users (work) VALUES (@work);";
+			String^ sqlQuery = "UPDATE users SET work = @work WHERE Id = @id;";
 			SqlCommand command(sqlQuery, % sqlConn);
 			command.Parameters->AddWithValue("@work", workText);
+			command.Parameters->AddWithValue("@id", id);
 
 			SqlDataReader^ reader = command.ExecuteReader();
 			
@@ -297,13 +303,13 @@ namespace ProjectOrganize {
 	}
 	
 	private: System::Void hobbies_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		richTextBox1->Text = mUser->hobbies;
 	}
 	private: System::Void finances_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		richTextBox1->Text = mUser->finances;
 	}
 	private: System::Void family_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		richTextBox1->Text = mUser->family;
 	}
 
 };

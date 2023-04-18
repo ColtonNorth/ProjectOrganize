@@ -275,7 +275,7 @@ namespace ProjectOrganize {
 			SqlConnection sqlConn(connString);
 			sqlConn.Open();
 
-			String^ sqlQuery = "INSERT INTO users (username, password, email) VALUES (@user, @pass, 'empty');";
+			String^ sqlQuery = "INSERT INTO users (username, password, email, work, hobbies, finances, family) VALUES (@user, @pass, 'empty', 'Organize work here!','Organize hobbies here!', 'Organize finances here!', 'Organize family here!');";
 			SqlCommand command(sqlQuery, % sqlConn);
 			command.Parameters->AddWithValue("@user", username);
 			command.Parameters->AddWithValue("@pass", password);
