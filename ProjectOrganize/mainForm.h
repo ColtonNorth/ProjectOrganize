@@ -22,6 +22,7 @@ namespace ProjectOrganize {
 	public ref class mainForm : public System::Windows::Forms::Form
 	{
 		User^ mUser;
+		int currentState;
 	public:
 		mainForm(User ^user)
 		{
@@ -31,7 +32,7 @@ namespace ProjectOrganize {
 			//
 			mUser = user;
 			label1->Text = user->name + "'s Organizer";
-			
+			currentState = 0;
 
 		}
 
@@ -264,8 +265,6 @@ namespace ProjectOrganize {
 		}
 #pragma endregion
 		
-
-
 	private: System::Void monthCalendar1_DateChanged(System::Object^ sender, System::Windows::Forms::DateRangeEventArgs^ e) {
 	}
 	//When quit is pressed we close the application.
@@ -274,7 +273,7 @@ namespace ProjectOrganize {
 	}
 	//Save the current state of the text box with the associated button.
 	private: System::Void saveToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ workText = richTextBox1->Text;
+		String^ textBoxText = richTextBox1->Text;
 		int^ id = mUser->id;
 		//Update user work info with text in textBox
 		try
@@ -283,12 +282,44 @@ namespace ProjectOrganize {
 			SqlConnection sqlConn(connString);
 			sqlConn.Open();
 
-			String^ sqlQuery = "UPDATE users SET work = @work WHERE Id = @id;";
-			SqlCommand command(sqlQuery, % sqlConn);
-			command.Parameters->AddWithValue("@work", workText);
-			command.Parameters->AddWithValue("@id", id);
+			String^ sqlQuery;
+			
+			if (currentState == 1)
+			{
+				String^ sqlQuery = "UPDATE users SET work = @text WHERE Id = @id;";
+				SqlCommand command(sqlQuery, % sqlConn);
+				command.Parameters->AddWithValue("@text", textBoxText);
+				command.Parameters->AddWithValue("@id", id);
 
-			SqlDataReader^ reader = command.ExecuteReader();
+				SqlDataReader^ reader = command.ExecuteReader();
+			}
+			else if (currentState == 2)
+			{
+				String^ sqlQuery = "UPDATE users SET hobbies = @text WHERE Id = @id;";
+				SqlCommand command(sqlQuery, % sqlConn);
+				command.Parameters->AddWithValue("@text", textBoxText);
+				command.Parameters->AddWithValue("@id", id);
+
+				SqlDataReader^ reader = command.ExecuteReader();
+			}
+			else if (currentState == 3)
+			{
+				String^ sqlQuery = "UPDATE users SET finances = @text WHERE Id = @id;";
+				SqlCommand command(sqlQuery, % sqlConn);
+				command.Parameters->AddWithValue("@text", textBoxText);
+				command.Parameters->AddWithValue("@id", id);
+
+				SqlDataReader^ reader = command.ExecuteReader();
+			}
+			else if (currentState == 4)
+			{
+				String^ sqlQuery = "UPDATE users SET family = @text WHERE Id = @id;";
+				SqlCommand command(sqlQuery, % sqlConn);
+				command.Parameters->AddWithValue("@text", textBoxText);
+				command.Parameters->AddWithValue("@id", id);
+
+				SqlDataReader^ reader = command.ExecuteReader();
+			}
 			
 		}
 		catch (Exception^ e)
@@ -300,16 +331,20 @@ namespace ProjectOrganize {
 	//When the work button is pressed, we want to fill the text box with work related data
 	private: System::Void work_Click(System::Object^ sender, System::EventArgs^ e) {
 		richTextBox1->Text = mUser->work;
+		currentState = 1;
 	}
 	
 	private: System::Void hobbies_Click(System::Object^ sender, System::EventArgs^ e) {
 		richTextBox1->Text = mUser->hobbies;
+		currentState = 2;
 	}
 	private: System::Void finances_Click(System::Object^ sender, System::EventArgs^ e) {
 		richTextBox1->Text = mUser->finances;
+		currentState = 3;
 	}
 	private: System::Void family_Click(System::Object^ sender, System::EventArgs^ e) {
 		richTextBox1->Text = mUser->family;
+		currentState = 4;
 	}
 
 };
