@@ -23,6 +23,7 @@ namespace ProjectOrganize {
 	{
 		User^ mUser;
 		int currentState;
+		String^ connString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=myOrganizer;Integrated Security=True";
 	public:
 		mainForm(User ^user)
 		{
@@ -278,7 +279,6 @@ namespace ProjectOrganize {
 		//Update user work info with text in textBox
 		try
 		{
-			String^ connString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=myOrganizer;Integrated Security=True";
 			SqlConnection sqlConn(connString);
 			sqlConn.Open();
 
@@ -291,7 +291,12 @@ namespace ProjectOrganize {
 				command.Parameters->AddWithValue("@text", textBoxText);
 				command.Parameters->AddWithValue("@id", id);
 
+				//Have to also updated the mUser values
+				mUser->work = textBoxText;
+
 				SqlDataReader^ reader = command.ExecuteReader();
+				MessageBox::Show("Work tab has been saved", "Database Updated",
+					MessageBoxButtons::OK);
 			}
 			else if (currentState == 2)
 			{
@@ -300,7 +305,12 @@ namespace ProjectOrganize {
 				command.Parameters->AddWithValue("@text", textBoxText);
 				command.Parameters->AddWithValue("@id", id);
 
+				//Have to also updated the mUser values
+				mUser->hobbies = textBoxText;
+
 				SqlDataReader^ reader = command.ExecuteReader();
+				MessageBox::Show("Hobbies tab has been saved", "Database Updated",
+					MessageBoxButtons::OK);
 			}
 			else if (currentState == 3)
 			{
@@ -309,7 +319,12 @@ namespace ProjectOrganize {
 				command.Parameters->AddWithValue("@text", textBoxText);
 				command.Parameters->AddWithValue("@id", id);
 
+				//Have to also updated the mUser values
+				mUser->finances = textBoxText;
+
 				SqlDataReader^ reader = command.ExecuteReader();
+				MessageBox::Show("Finances tab has been saved", "Database Updated",
+					MessageBoxButtons::OK);
 			}
 			else if (currentState == 4)
 			{
@@ -318,7 +333,12 @@ namespace ProjectOrganize {
 				command.Parameters->AddWithValue("@text", textBoxText);
 				command.Parameters->AddWithValue("@id", id);
 
+				//Have to also updated the mUser values
+				mUser->family = textBoxText;
+
 				SqlDataReader^ reader = command.ExecuteReader();
+				MessageBox::Show("Family tab has been saved", "Database Updated",
+					MessageBoxButtons::OK);
 			}
 			
 		}
